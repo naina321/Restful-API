@@ -76,6 +76,14 @@ app.patch("/articles/:articleTitle", (req, res) => {
     }
   );
 });
+
+//delete a specific request
+app.delete("/articles/:articleName", (req, res) => {
+  Article.deleteOne({ name: req.params.articleName }, (err) => {
+    if (err) console.log(err);
+    else res.send("deleted");
+  });
+});
 app.listen(3000, () => {
   console.log("server started on port 3000");
 });
