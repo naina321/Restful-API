@@ -42,6 +42,14 @@ app.delete("/articles", (req, res) => {
   });
 });
 
+app.get("/articles/:articleTitle", (req, res) => {
+  Article.find({ name: req.params.articleTitle }, (err, articleFound) => {
+    console.log(req.params.articleTitle);
+    if (err) res.send(err);
+    else res.send(articleFound);
+    console.log(articleFound);
+  });
+});
 app.listen(3000, () => {
   console.log("server started on port 3000");
 });
