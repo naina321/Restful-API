@@ -58,7 +58,19 @@ app.put("/articles/:articleTitle", (req, res) => {
     { name: req.params.articleTitle },
     { name: req.body.name, title: req.body.title },
     (err) => {
-      console.log(err);
+      if (err) res.send(err);
+      else res.send("updated");
+    }
+  );
+});
+
+//update a particularrecord inside a document
+app.patch("/articles/:articleTitle", (req, res) => {
+  // console.log(req.params.articleTitle, req.body.name, req.body.title);
+  Article.updateOne(
+    { name: req.params.articleTitle },
+    { $set: { title: req.body.title } },
+    (err) => {
       if (err) res.send(err);
       else res.send("updated");
     }
