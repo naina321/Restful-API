@@ -50,6 +50,20 @@ app.get("/articles/:articleTitle", (req, res) => {
     console.log(articleFound);
   });
 });
+
+//update any document
+app.put("/articles/:articleTitle", (req, res) => {
+  console.log(req.params.articleTitle, req.body.name, req.body.title);
+  Article.updateOne(
+    { name: req.params.articleTitle },
+    { name: req.body.name, title: req.body.title },
+    (err) => {
+      console.log(err);
+      if (err) res.send(err);
+      else res.send("updated");
+    }
+  );
+});
 app.listen(3000, () => {
   console.log("server started on port 3000");
 });
